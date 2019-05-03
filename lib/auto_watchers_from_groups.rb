@@ -13,9 +13,15 @@ module AutoWatchersFromGroups
 		def auto_watchers(context)
 
 			@settings ||= Setting.plugin_redmine_auto_watchers_from_groups
-			@issue = Issue.find context[:issue]
+			#@issue = Issue.find context[:issue]
+			#@issue = Issue.find(context[:request].params[:id])
+			@issue = Issue.find(context[:params][:id])
 
-			if context[:params][:issue]
+		        #puts "TEST"
+		        #Rails.logger.info @issue
+
+			#if context[:params][:issue]
+			unless @issue.nil?
 
 				# normal group assign
 				if @settings['groups_enabled'].include? context[:params][:issue][:assigned_to_id]
