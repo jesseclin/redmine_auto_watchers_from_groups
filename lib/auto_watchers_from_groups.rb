@@ -15,7 +15,12 @@ module AutoWatchersFromGroups
 			@settings ||= Setting.plugin_redmine_auto_watchers_from_groups
 			#@issue = Issue.find context[:issue]
 			#@issue = Issue.find(context[:request].params[:id])
-			@issue = Issue.find(context[:params][:id])
+
+			@issue = nil
+			unless context[:params][:id] == nil
+			   @issue = Issue.find(context[:params][:id])
+		           #Rails.logger.info "[INFO] ID=" + context[:params][:id]
+                        end
 
 		        #puts "TEST"
 		        #Rails.logger.info @issue
